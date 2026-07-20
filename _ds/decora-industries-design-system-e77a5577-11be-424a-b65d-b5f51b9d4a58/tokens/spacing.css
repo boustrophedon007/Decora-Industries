@@ -1,0 +1,14 @@
+/* DECORA INDUSTRIES — spacing, radius, grid */
+:root{
+--space-2:2px;--space-4:4px;--space-6:6px;--space-8:8px;--space-10:10px;--space-12:12px;--space-16:16px;--space-20:20px;--space-24:24px;--space-32:32px;--space-40:40px;--space-48:48px;--space-56:56px;--space-64:64px;--space-72:72px;--space-80:80px;--space-96:96px;--space-128:128px;
+/* Radius — disciplined, near-square. Full reserved for pills/avatars only. */
+--radius-none:0;--radius-xs:2px;--radius-sm:4px;--radius-md:6px;--radius-lg:10px;--radius-xl:14px;--radius-2xl:20px;--radius-full:9999px;
+/* Grid */
+--container-max:1320px;--container-content:1120px;--container-prose:720px;
+--grid-columns:12; /* @kind other */
+--grid-gutter:24px;--grid-margin:32px;
+--bp-sm:640px;--bp-md:768px;--bp-lg:1024px;--bp-xl:1280px;--bp-2xl:1600px;
+/* Control heights */
+--control-sm:32px;--control-md:40px;--control-lg:48px;
+--touch-target-min:44px;
+}

@@ -1,0 +1,14 @@
+/* DECORA INDUSTRIES — base element styles */
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font:var(--type-body-m);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5,h6{margin:0;color:var(--ink)}
+h1{font:var(--type-h1);letter-spacing:var(--tracking-h1)}
+h2{font:var(--type-h2);letter-spacing:var(--tracking-h2)}
+h3{font:var(--type-h3);letter-spacing:var(--tracking-h3)}
+h4{font:var(--type-h4)}h5{font:var(--type-h5)}h6{font:var(--type-h6);text-transform:uppercase}
+p{margin:0;color:var(--text-body)}
+a{color:var(--link);text-decoration:none;transition:color var(--transition-fast)}
+a:hover{color:var(--link-hover);text-decoration:underline;text-underline-offset:3px}
+code,pre{font:var(--type-code)}
+::selection{background:var(--primary-200);color:var(--primary-950)}
+:focus-visible{outline:none;box-shadow:var(--ring-focus)}

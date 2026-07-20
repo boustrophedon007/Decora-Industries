@@ -1,0 +1,54 @@
+# =========================================================
+# DECORA INDUSTRIES — .htaccess (OPTIONAL)
+# The website works WITHOUT this file. It only adds caching,
+# compression, security headers, a custom 404 page and MIME
+# types on Apache shared hosting. Safe to delete if unsupported.
+# =========================================================
+
+# ---- Custom error page ----
+ErrorDocument 404 /404.html
+
+# ---- Correct MIME types (some hosts miss these) ----
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType video/webm .webm
+  AddType video/mp4 .mp4
+  AddType application/pdf .pdf
+  AddType text/css .css
+  AddType application/javascript .js
+</IfModule>
+
+# ---- GZIP compression ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---- Browser caching ----
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType video/webm "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresDefault "access plus 2 days"
+</IfModule>
+
+# ---- Basic security headers ----
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ---- Optional: force HTTPS (uncomment after enabling SSL) ----
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} off
+#   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>

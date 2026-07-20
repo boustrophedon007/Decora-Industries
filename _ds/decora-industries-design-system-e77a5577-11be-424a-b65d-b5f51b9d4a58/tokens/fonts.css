@@ -1,0 +1,10 @@
+/* DECORA INDUSTRIES — webfonts (Google Fonts CDN; no licensed binaries provided)
+   Display/UI: Space Grotesk — sharp, engineered grotesque
+   Body: Archivo — neutral, high-legibility grotesque
+   Mono: JetBrains Mono — metrics, codes, SKUs */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Archivo:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@400..700&display=swap');
+:root{
+--font-display:"Space Grotesk","Archivo",-apple-system,system-ui,sans-serif;
+--font-body:"Archivo",-apple-system,system-ui,"Helvetica Neue",sans-serif;
+--font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
