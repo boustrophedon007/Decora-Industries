@@ -5,11 +5,12 @@
    every page (defensive by design). No console errors, no crash
    if a section is missing.
    =========================================================
-   ── OWNER-EDITABLE CONTACT CONSTANTS ──────────────────────
-   Change these two values to your real business contacts. They
-   drive the WhatsApp and email enquiry buttons across the site. */
-const WHATSAPP_NUMBER = "919999999999";       /* <-- Replace with your WhatsApp number, country code + number, digits only */
-const SALES_EMAIL     = "sales@example.com";   /* <-- Replace with your sales email address */
+   ── CONTACT DETAILS ───────────────────────────────────────
+   Do not edit contact details here. They live in
+   js/site-config.js (window.DECORA_CONFIG). */
+var SITE_CONFIG     = window.DECORA_CONFIG || {};
+var WHATSAPP_NUMBER = String(SITE_CONFIG.whatsapp || "").replace(/\D/g, "");
+var SALES_EMAIL     = String(SITE_CONFIG.email || "");
 /* ========================================================= */
 
 (function () {
@@ -26,6 +27,7 @@ const SALES_EMAIL     = "sales@example.com";   /* <-- Replace with your sales em
   document.addEventListener("DOMContentLoaded", init);
 
   function init() {
+    initContactDetails();
     initYear();
     initHeaderScroll();
     initMegaMenu();
@@ -39,6 +41,40 @@ const SALES_EMAIL     = "sales@example.com";   /* <-- Replace with your sales em
     initFeaturedProducts();
     initImageFallback();
     initEnquiryForms();
+  }
+
+  /* ---- Contact details (values from js/site-config.js) ----
+     [data-contact-link="phone|email|whatsapp"] gets its href set;
+     [data-contact-text="phone|email"] gets its visible text set.
+     The values written in the HTML are only a no-JS fallback. */
+  function initContactDetails() {
+    var phone = String(SITE_CONFIG.phone || "");
+    var hrefs = {
+      phone: phone ? "tel:" + phone.replace(/[^\d+]/g, "") : "",
+      email: SALES_EMAIL ? "mailto:" + SALES_EMAIL : "",
+      whatsapp: WHATSAPP_NUMBER ? "https://wa.me/" + WHATSAPP_NUMBER : ""
+    };
+    var texts = { phone: phone, email: SALES_EMAIL };
+
+    $$("[data-contact-link]").forEach(function (el) {
+      var href = hrefs[el.getAttribute("data-contact-link")];
+      if (href) el.setAttribute("href", href);
+    });
+    $$("[data-contact-text]").forEach(function (el) {
+      var text = texts[el.getAttribute("data-contact-text")];
+      if (text) el.textContent = text;
+    });
+
+    // Organization schema (homepage) for search engines
+    var schema = $("script[data-org-schema]");
+    if (schema) {
+      try {
+        var data = JSON.parse(schema.textContent);
+        if (SALES_EMAIL) data.email = SALES_EMAIL;
+        if (phone) data.telephone = phone.replace(/\s+/g, "-");
+        schema.textContent = JSON.stringify(data, null, 2);
+      } catch (e) { /* leave schema as-is */ }
+    }
   }
 
   /* ---- Homepage featured products (data-driven from products-data.js) ---- */

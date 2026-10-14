@@ -36,18 +36,21 @@ A few notes:
 The logo is temporary, text-based. Edit the `.brand` block (search for `class="brand"`) in **every** `*.html` file — it appears in the header and footer. Replace the `<span class="brand__mark">…</span>` and wordmark with your own `<img src="assets/images/brand/your-logo.svg" …>`.
 
 ### Update contact information
-Replace these placeholders everywhere they appear (they are marked with HTML comments like `<!-- Replace with actual company phone number -->`):
-- **Phone** — `+91 99999 99999` / `tel:+919999999999` (in the utility bar, header, footer, contact page)
-- **Email** — `sales@example.com` / `mailto:sales@example.com`
+**Phone, WhatsApp and email are set in ONE file: `js/site-config.js`.**
+```js
+window.DECORA_CONFIG = {
+  phone:    "+91 99999 99999",    // as visitors see it; the call link is built from it
+  whatsapp: "919999999999",       // country code + number, digits only
+  email:    "sales@example.com"
+};
+```
+Edit, save, refresh — every page (top bar, mobile menu, footer, contact page, sticky call button, WhatsApp/email enquiry buttons, homepage search-engine schema) updates automatically.
+
+How it works: links in the HTML carry `data-contact-link="phone|email|whatsapp"` (href is set) and/or `data-contact-text="phone|email"` (visible text is set); `js/script.js` fills them from the config. The placeholder values still written in the HTML are only a fallback for browsers with JavaScript disabled — you don't need to edit them. When adding a new phone/email link to a page, add these attributes and make sure the page loads `js/site-config.js` before `js/script.js`.
+
+Still edited directly in the HTML:
 - **Address** — `[Your business address], India`
 - **Social links** — the `href="#"` values in the footer `.footer__social`
-
-Two values also live in **`js/script.js`** at the very top:
-```js
-const WHATSAPP_NUMBER = "919999999999";   // country code + number, digits only
-const SALES_EMAIL     = "sales@example.com";
-```
-These drive the WhatsApp and email enquiry buttons.
 
 ### Add or edit products
 Open **`data/products-data.js`**. Copy any product object, paste it into the `window.DECORA_PRODUCTS` array and edit its fields. The file header explains every field. Key points:
